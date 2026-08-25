@@ -139,10 +139,10 @@ Agent:
 
 ## Data sources
 
-- **Symbol resolution**: bundled [SEC EDGAR company tickers](https://www.sec.gov/files/company_tickers.json) — ~10,000 US-listed companies, updated with each plugin release
+- **Symbol resolution**: bundled [SEC EDGAR company tickers](https://www.sec.gov/files/company_tickers.json) — ~10,000 US-listed companies. The plugin automatically refreshes this data from SEC EDGAR if it is more than 7 days old when DSH starts. If the refresh fails (no network, SEC unavailable), the bundled copy is used as fallback.
 - **Live quotes & profiles**: [Yahoo Finance](https://finance.yahoo.com) via [yahoo-finance2](https://github.com/gadicc/node-yahoo-finance2)
 
-To refresh the bundled SEC data to the latest:
+To force a manual refresh at any time:
 
 ```sh
 npm run update-sec-data
