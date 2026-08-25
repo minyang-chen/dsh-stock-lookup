@@ -7,6 +7,14 @@ A [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) plugin tha
 
 No API keys required. No external services beyond Yahoo Finance.
 
+<p align="center">
+  <img src="./assets/preview.svg" alt="dsh-stock-lookup overview" width="760"/>
+</p>
+
+<p align="center">
+  <img src="./assets/preview.png" alt="dsh-stock-lookup in action" width="720"/>
+</p>
+
 ## Install
 
 ```sh

@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="380" viewBox="0 0 760 380">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f1117"/>
+      <stop offset="100%" stop-color="#1a1d2e"/>
+    </linearGradient>
+    <linearGradient id="cardBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e2030"/>
+      <stop offset="100%" stop-color="#181a28"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00d26a"/>
+      <stop offset="100%" stop-color="#00b894"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="760" height="380" fill="url(#bg)" rx="16"/>
+
+  <!-- Subtle grid lines -->
+  <line x1="0" y1="190" x2="760" y2="190" stroke="#ffffff08" stroke-width="1"/>
+  <line x1="380" y1="0" x2="380" y2="380" stroke="#ffffff08" stroke-width="1"/>
+
+  <!-- Header bar -->
+  <rect x="28" y="24" width="704" height="56" rx="10" fill="#252840" opacity="0.8"/>
+
+  <!-- Plugin icon -->
+  <text x="52" y="61" font-size="26" font-family="system-ui">📈</text>
+
+  <!-- Plugin name -->
+  <text x="88" y="58" font-family="'SF Mono', 'Fira Code', monospace" font-size="20" font-weight="700" fill="#ffffff">dsh-stock-lookup</text>
+
+  <!-- Tagline -->
+  <text x="88" y="74" font-family="system-ui, sans-serif" font-size="12" fill="#8892b0">US stock symbol resolution + live quotes · SEC EDGAR + Yahoo Finance · No API key required</text>
+
+  <!-- DSH badge -->
+  <rect x="614" y="34" width="104" height="22" rx="11" fill="#4c1d95" opacity="0.9"/>
+  <text x="666" y="49" font-family="system-ui" font-size="11" fill="#c4b5fd" text-anchor="middle" font-weight="600">DSH Plugin</text>
+
+  <!-- Left card: stock_resolve -->
+  <rect x="28" y="100" width="336" height="184" rx="12" fill="url(#cardBg)" stroke="#2d3154" stroke-width="1" filter="url(#shadow)"/>
+
+  <!-- Card accent bar -->
+  <rect x="28" y="100" width="4" height="184" rx="2" fill="#7c3aed"/>
+
+  <!-- Tool name -->
+  <text x="52" y="126" font-family="'SF Mono', 'Fira Code', monospace" font-size="13" fill="#7c3aed" font-weight="700">stock_resolve</text>
+  <text x="168" y="126" font-family="'SF Mono', monospace" font-size="13" fill="#64748b">("Apple")</text>
+
+  <!-- Divider -->
+  <line x1="44" y1="135" x2="348" y2="135" stroke="#2d3154" stroke-width="1"/>
+
+  <!-- Result rows -->
+  <text x="52" y="157" font-family="system-ui" font-size="11" fill="#64748b">TICKER</text>
+  <text x="180" y="157" font-family="'SF Mono', monospace" font-size="13" fill="#e2e8f0" font-weight="600">AAPL</text>
+
+  <text x="52" y="180" font-family="system-ui" font-size="11" fill="#64748b">COMPANY</text>
+  <text x="180" y="180" font-family="system-ui" font-size="12" fill="#cbd5e1">Apple Inc.</text>
+
+  <text x="52" y="203" font-family="system-ui" font-size="11" fill="#64748b">CIK</text>
+  <text x="180" y="203" font-family="'SF Mono', monospace" font-size="12" fill="#94a3b8">320193</text>
+
+  <text x="52" y="226" font-family="system-ui" font-size="11" fill="#64748b">SEC EDGAR</text>
+  <text x="180" y="226" font-family="system-ui" font-size="11" fill="#3b82f6" text-decoration="underline">View 10-K filings →</text>
+
+  <!-- Supports note -->
+  <rect x="44" y="240" width="308" height="30" rx="6" fill="#1e1b3a"/>
+  <text x="198" y="259" font-family="system-ui" font-size="11" fill="#8b5cf6" text-anchor="middle">Fuzzy search · 10,400+ companies · exact / prefix / name</text>
+
+  <!-- Right card: stock_profile -->
+  <rect x="396" y="100" width="336" height="184" rx="12" fill="url(#cardBg)" stroke="#2d3154" stroke-width="1" filter="url(#shadow)"/>
+
+  <!-- Card accent bar -->
+  <rect x="396" y="100" width="4" height="184" rx="2" fill="#00b894"/>
+
+  <!-- Tool name -->
+  <text x="420" y="126" font-family="'SF Mono', 'Fira Code', monospace" font-size="13" fill="#00b894" font-weight="700">stock_profile</text>
+  <text x="536" y="126" font-family="'SF Mono', monospace" font-size="13" fill="#64748b">("AAPL")</text>
+
+  <!-- Divider -->
+  <line x1="412" y1="135" x2="716" y2="135" stroke="#2d3154" stroke-width="1"/>
+
+  <!-- Price row -->
+  <text x="420" y="160" font-family="system-ui" font-size="22" font-weight="700" fill="#ffffff" filter="url(#glow)">$310.34</text>
+  <rect x="564" y="146" width="84" height="20" rx="4" fill="#052e16"/>
+  <text x="606" y="160" font-family="'SF Mono', monospace" font-size="12" fill="#00d26a" text-anchor="middle">↑ +0.32%</text>
+
+  <!-- Stats grid -->
+  <text x="420" y="185" font-family="system-ui" font-size="11" fill="#64748b">MARKET CAP</text>
+  <text x="420" y="199" font-family="'SF Mono', monospace" font-size="12" fill="#e2e8f0">$4.53T</text>
+
+  <text x="520" y="185" font-family="system-ui" font-size="11" fill="#64748b">P/E RATIO</text>
+  <text x="520" y="199" font-family="'SF Mono', monospace" font-size="12" fill="#e2e8f0">35.5</text>
+
+  <text x="620" y="185" font-family="system-ui" font-size="11" fill="#64748b">EPS TTM</text>
+  <text x="620" y="199" font-family="'SF Mono', monospace" font-size="12" fill="#e2e8f0">$8.75</text>
+
+  <text x="420" y="222" font-family="system-ui" font-size="11" fill="#64748b">52W RANGE</text>
+  <text x="420" y="236" font-family="'SF Mono', monospace" font-size="11" fill="#94a3b8">$224.69 – $344.57</text>
+
+  <text x="580" y="222" font-family="system-ui" font-size="11" fill="#64748b">SECTOR</text>
+  <text x="580" y="236" font-family="system-ui" font-size="11" fill="#94a3b8">Technology</text>
+
+  <!-- Live badge -->
+  <rect x="412" y="240" width="308" height="30" rx="6" fill="#052e16"/>
+  <circle cx="430" cy="255" r="4" fill="#00d26a"/>
+  <text x="566" y="259" font-family="system-ui" font-size="11" fill="#00b894" text-anchor="middle">Live via Yahoo Finance · 15s cache · no API key</text>
+
+  <!-- Footer -->
+  <text x="380" y="320" font-family="system-ui" font-size="12" fill="#475569" text-anchor="middle">
+    dsh plugin --profile web add github:minyang-chen/dsh-stock-lookup
+  </text>
+
+  <!-- Footer code box -->
+  <rect x="140" y="304" width="480" height="24" rx="6" fill="#1e2030" stroke="#2d3154" stroke-width="1"/>
+  <text x="380" y="320" font-family="'SF Mono', 'Fira Code', monospace" font-size="12" fill="#7c3aed" text-anchor="middle">
+    dsh plugin --profile web add github:minyang-chen/dsh-stock-lookup
+  </text>
+
+  <!-- Bottom tagline -->
+  <text x="380" y="356" font-family="system-ui" font-size="11" fill="#334155" text-anchor="middle">
+    DeepSeek Harness Plugin · MIT License · github.com/minyang-chen/dsh-stock-lookup
+  </text>
+</svg>
