@@ -1,4 +1,7 @@
-import yahooFinance from 'yahoo-finance2'
+import YahooFinance from 'yahoo-finance2'
+
+// yahoo-finance2 v4: must instantiate rather than use the default singleton
+const yf = new YahooFinance({ suppressNotices: ['yahooSurvey'] })
 
 export interface QuoteResult {
   symbol: string
@@ -56,8 +59,8 @@ export class YahooClient {
 
     // Fetch quote and quoteSummary in parallel for richer data
     const [q, summary] = await Promise.allSettled([
-      yahooFinance.quote(key, {}, { fetchOptions: { signal } }),
-      yahooFinance.quoteSummary(key, { modules: ['assetProfile', 'summaryProfile'] }, { fetchOptions: { signal } }),
+      yf.quote(key, {}, { fetchOptions: { signal } }),
+      yf.quoteSummary(key, { modules: ['assetProfile', 'summaryProfile'] }, { fetchOptions: { signal } }),
     ])
 
     if (q.status === 'rejected') {
