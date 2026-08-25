@@ -34,6 +34,8 @@
     "typecheck": "node node_modules/typescript/bin/tsc -p tsconfig.json --noEmit",
     "typecheck:tests": "node node_modules/typescript/bin/tsc -p tsconfig.test.json --noEmit",
     "test": "NODE_ENV=test node node_modules/vitest/vitest.mjs run tests",
+    "smoke": "npm run build && node scripts/smoke.mjs",
+    "update-sec-data": "node scripts/update-sec-data.mjs",
     "prepack": "npm run clean && npm run typecheck && npm test && npm run build"
   },
   "dependencies": {

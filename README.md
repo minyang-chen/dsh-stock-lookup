@@ -139,8 +139,16 @@ Agent:
 
 ## Data sources
 
-- **Symbol resolution**: bundled [SEC EDGAR company tickers](https://www.sec.gov/files/company_tickers.json) — updated with each plugin release
+- **Symbol resolution**: bundled [SEC EDGAR company tickers](https://www.sec.gov/files/company_tickers.json) — ~10,000 US-listed companies, updated with each plugin release
 - **Live quotes & profiles**: [Yahoo Finance](https://finance.yahoo.com) via [yahoo-finance2](https://github.com/gadicc/node-yahoo-finance2)
+
+To refresh the bundled SEC data to the latest:
+
+```sh
+npm run update-sec-data
+git add data/company_tickers.json
+git commit -m "chore: refresh SEC EDGAR company tickers"
+```
 
 ## License
 
