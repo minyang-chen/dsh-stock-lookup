@@ -1,6 +1,5 @@
-import { createReadStream } from 'node:fs'
+import { createReadStream, statSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { createInterface } from 'node:readline'
 
 /** One entry from SEC company_tickers.json */
 export interface SecEntry {
@@ -17,9 +16,16 @@ interface RawEntry {
   title: string
 }
 
+const SEC_URL = 'https://www.sec.gov/files/company_tickers.json'
+const SEC_USER_AGENT = 'dsh-stock-lookup/0.1.0 contact@example.com'
+const STALE_AFTER_MS = 7 * 24 * 60 * 60 * 1000 // 1 week
+
 /**
  * Lazy-loaded in-memory index of the SEC company_tickers.json file.
  * The file ships with the plugin in the `data/` directory.
+ *
+ * On first load, checks the file's mtime. If older than 1 week, attempts
+ * a background refresh from SEC EDGAR before building the index.
  *
  * Supports two search modes:
  *   - exact ticker match (case-insensitive)
@@ -38,7 +44,7 @@ export class SecIndex {
     this.dataPath = dataPath ?? resolve(import.meta.dirname ?? __dirname, '../../data/company_tickers.json')
   }
 
-  /** Resolve the index, loading it on first call. */
+  /** Resolve the index, loading (and optionally refreshing) it on first call. */
   private async load(): Promise<SecEntry[]> {
     if (this.entries !== undefined) return this.entries
     if (this.loadPromise === undefined) {
@@ -49,7 +55,9 @@ export class SecIndex {
   }
 
   private async _load(): Promise<void> {
-    // Stream-parse to avoid holding the raw string in memory alongside the parsed result.
+    // Check if the bundled file is stale before loading it
+    await this._refreshIfStale()
+
     const raw = await new Promise<string>((resolve, reject) => {
       const chunks: Buffer[] = []
       const stream = createReadStream(this.dataPath)
@@ -65,6 +73,45 @@ export class SecIndex {
       title: e.title,
       secUrl: `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${e.cik_str}&type=10-K&dateb=&owner=include&count=10`,
     }))
+  }
+
+  /**
+   * Check file mtime. If older than STALE_AFTER_MS, attempt to download
+   * a fresh copy from SEC EDGAR. Failures are silently ignored — the
+   * bundled (stale) copy is used as fallback.
+   */
+  private async _refreshIfStale(): Promise<void> {
+    try {
+      const stat = statSync(this.dataPath)
+      const ageMs = Date.now() - stat.mtimeMs
+      if (ageMs < STALE_AFTER_MS) return // fresh enough
+
+      const ageDays = Math.floor(ageMs / (24 * 60 * 60 * 1000))
+      console.log(`[dsh-stock-lookup] SEC data is ${ageDays} days old — refreshing from ${SEC_URL}`)
+
+      const res = await fetch(SEC_URL, {
+        headers: {
+          'User-Agent': SEC_USER_AGENT,
+          'Accept': 'application/json',
+        },
+        signal: AbortSignal.timeout(15_000),
+      })
+
+      if (!res.ok) {
+        console.warn(`[dsh-stock-lookup] SEC refresh failed (HTTP ${res.status}) — using cached data`)
+        return
+      }
+
+      const text = await res.text()
+      // Validate it's parseable JSON before overwriting
+      JSON.parse(text)
+      writeFileSync(this.dataPath, text, 'utf8')
+      console.log(`[dsh-stock-lookup] SEC data refreshed (${(text.length / 1024).toFixed(0)} KB)`)
+    } catch (err) {
+      // Never block plugin startup due to a refresh failure
+      const msg = err instanceof Error ? err.message : String(err)
+      console.warn(`[dsh-stock-lookup] SEC refresh skipped: ${msg}`)
+    }
   }
 
   /**
