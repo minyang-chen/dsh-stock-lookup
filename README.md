@@ -88,6 +88,38 @@ Get a live quote and company profile by ticker symbol.
 }
 ```
 
+## Usage examples
+
+Just ask the agent naturally — it selects the right tool automatically.
+
+**Direct ticker lookup** (agent skips `stock_resolve`, calls `stock_profile` directly):
+```
+What is Apple's current stock price?
+```
+
+**Company name → symbol → profile** (two-tool chain):
+```
+What sector is Nvidia in?
+```
+Agent calls `stock_resolve("nvidia")` → finds `NVDA` → calls `stock_profile("NVDA")`.
+
+**Ambiguous name:**
+```
+Look up Amazon stock
+```
+
+**Get the SEC EDGAR filing link:**
+```
+Give me the SEC EDGAR filing link for Microsoft
+```
+Agent calls `stock_resolve("Microsoft")` and surfaces the direct link to EDGAR filings.
+
+**Find multiple companies by name:**
+```
+Find all companies with "apple" in the name
+```
+Returns up to 10 matches with ticker, CIK, and EDGAR link for each.
+
 ## Typical agent workflow
 
 ```
