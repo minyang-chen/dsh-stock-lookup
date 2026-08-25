@@ -1,6 +1,6 @@
 {
   "name": "dsh-stock-lookup",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "DSH plugin: resolve a company name to a stock symbol and fetch a live stock profile with current price, powered by SEC EDGAR and yahoo-finance2",
   "license": "MIT",
   "author": "minyang-chen",
@@ -47,9 +47,15 @@
     "@deepseek-ai/schemastery": "^3.18.1-rc.4"
   },
   "peerDependenciesMeta": {
-    "@deepseek-ai/cordis": { "optional": true },
-    "@deepseek-ai/dsh-tools": { "optional": true },
-    "@deepseek-ai/schemastery": { "optional": true }
+    "@deepseek-ai/cordis": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    },
+    "@deepseek-ai/schemastery": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "4.0.1",
