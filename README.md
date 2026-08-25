@@ -22,6 +22,19 @@ dsh plugin --profile web add /path/to/dsh-stock-lookup
 
 > After installing, restart DSH: `dsh web`
 
+## Update to latest version
+
+```sh
+# Upgrade in place:
+dsh plugin --profile web upgrade dsh-stock-lookup
+
+# Or remove and re-add:
+dsh plugin --profile web remove dsh-stock-lookup
+dsh plugin --profile web add github:minyang-chen/dsh-stock-lookup
+```
+
+> Restart DSH after upgrading.
+
 ## Tools
 
 ### `stock_resolve`
