@@ -7,19 +7,20 @@ A [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) plugin tha
 
 No API keys required. No external services beyond Yahoo Finance.
 
-## Installation
+## Install
 
 ```sh
-dsh plugin add dsh-stock-lookup
+# From npm (after publish):
+dsh plugin --profile web add dsh-stock-lookup
+
+# From GitHub (no npm publish needed):
+dsh plugin --profile web add github:minyang-chen/dsh-stock-lookup
+
+# From a local clone:
+dsh plugin --profile web add /path/to/dsh-stock-lookup
 ```
 
-Or manually add to your `~/.dsh/profiles/web/cordis.patch.yml`:
-
-```yaml
-- insert:
-    - id: dsh-stock-lookup
-      name: dsh-stock-lookup
-```
+> After installing, restart DSH: `dsh web`
 
 ## Tools
 
