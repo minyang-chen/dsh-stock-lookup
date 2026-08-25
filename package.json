@@ -1,0 +1,81 @@
+{
+  "name": "dsh-stock-lookup",
+  "version": "0.1.0",
+  "description": "DSH plugin: resolve a company name to a stock symbol and fetch a live stock profile with current price, powered by SEC EDGAR and yahoo-finance2",
+  "license": "MIT",
+  "author": "minyang-chen",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minyang-chen/dsh-stock-lookup.git"
+  },
+  "homepage": "https://github.com/minyang-chen/dsh-stock-lookup#readme",
+  "bugs": {
+    "url": "https://github.com/minyang-chen/dsh-stock-lookup/issues"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "clean": "node scripts/clean.mjs",
+    "build": "node scripts/build.mjs",
+    "typecheck": "node node_modules/typescript/bin/tsc -p tsconfig.json --noEmit",
+    "typecheck:tests": "node node_modules/typescript/bin/tsc -p tsconfig.test.json --noEmit",
+    "test": "NODE_ENV=test node node_modules/vitest/vitest.mjs run tests",
+    "prepack": "npm run clean && npm run typecheck && npm test && npm run build"
+  },
+  "dependencies": {
+    "yahoo-finance2": "4.0.2"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1-rc.4",
+    "@deepseek-ai/dsh-tools": ">=0.1.0-rc.1 <0.2.0",
+    "@deepseek-ai/schemastery": "^3.18.1-rc.4"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": { "optional": true },
+    "@deepseek-ai/dsh-tools": { "optional": true },
+    "@deepseek-ai/schemastery": { "optional": true }
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "4.0.1",
+    "@deepseek-ai/dsh-tools": "0.1.0-rc.6",
+    "@deepseek-ai/schemastery": "3.18.1",
+    "@types/node": "22.20.0",
+    "typescript": "6.0.3",
+    "vitest": "4.1.8"
+  },
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "files": [
+    "lib",
+    "data/company_tickers.json",
+    "cordis.patch.yml",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "stocks",
+    "stock-lookup",
+    "sec",
+    "edgar",
+    "yahoo-finance"
+  ]
+}

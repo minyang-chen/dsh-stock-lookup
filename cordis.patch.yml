@@ -1,0 +1,5 @@
+# DSH stock lookup bundle patch.
+# Registers two agent tools: stock_resolve and stock_profile.
+- insert:
+    - id: dsh-stock-lookup
+      name: dsh-stock-lookup
