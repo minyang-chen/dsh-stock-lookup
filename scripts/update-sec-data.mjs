@@ -20,9 +20,11 @@ console.log(`Fetching ${SEC_URL} ...`)
 
 const res = await fetch(SEC_URL, {
   headers: {
-    // SEC requires a User-Agent identifying your app and contact
-    'User-Agent': 'dsh-stock-lookup/0.1.0 (https://github.com/minyang-chen/dsh-stock-lookup)',
+    // SEC EDGAR requires User-Agent with app name + contact email
+    // See: https://www.sec.gov/os/accessing-edgar-data
+    'User-Agent': 'dsh-stock-lookup/0.1.0 contact@example.com',
     'Accept': 'application/json',
+    'Accept-Encoding': 'gzip, deflate',
   },
 })
 
