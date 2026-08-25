@@ -46,7 +46,16 @@ Resolve a company name or ticker to a stock symbol.
 | `query` | string | ✅ | Company name, partial name, or ticker. E.g. `"Apple"`, `"nvidia"`, `"TSLA"` |
 | `limit` | number | | Max results to return (1–10, default 5) |
 
-**Example response:**
+**What the agent says:**
+```
+Found 1 match for "Apple":
+• AAPL — Apple Inc. (CIK 320193)
+  SEC EDGAR: https://www.sec.gov/cgi-bin/browse-edgar?...
+```
+
+<details>
+<summary>Raw tool response (JSON)</summary>
+
 ```json
 {
   "status": "ok",
@@ -61,6 +70,8 @@ Resolve a company name or ticker to a stock symbol.
 }
 ```
 
+</details>
+
 ### `stock_profile`
 
 Get a live quote and company profile by ticker symbol.
@@ -69,17 +80,40 @@ Get a live quote and company profile by ticker symbol.
 |---|---|---|---|
 | `ticker` | string | ✅ | Stock ticker. E.g. `"AAPL"`, `"NVDA"`, `"BRK-B"` |
 
-**Example response:**
+**What the agent says:**
+```
+Apple (AAPL) — $310.34 on Nasdaq, up $0.99 (+0.32%) from the previous close of $309.35,
+as of the 2026-08-24 close.
+
+  Volume:        34.4M shares
+  Market cap:    ~$4.53T
+  52-week range: $224.69 – $344.57
+  Valuation:     trailing P/E 35.5, forward P/E 32.5, EPS (TTM) $8.75
+  Sector:        Technology — Consumer Electronics
+  Country:       United States
+```
+
+<details>
+<summary>Raw tool response (JSON)</summary>
+
 ```json
 {
   "status": "ok",
   "data": {
     "symbol": "AAPL",
     "name": "Apple Inc.",
-    "price": 195.89,
-    "change_percent": 0.0142,
-    "market_cap": 3020000000000,
-    "trailing_pe": 32.1,
+    "exchange": "NasdaqGS",
+    "currency": "USD",
+    "price": 310.34,
+    "change": 0.99,
+    "change_percent": 0.32,
+    "previous_close": 309.35,
+    "market_cap": 4529157832704,
+    "trailing_pe": 35.47,
+    "forward_pe": 32.54,
+    "eps_trailing_twelve_months": 8.75,
+    "fifty_two_week_high": 344.57,
+    "fifty_two_week_low": 224.69,
     "sector": "Technology",
     "industry": "Consumer Electronics",
     "country": "United States",
@@ -87,6 +121,8 @@ Get a live quote and company profile by ticker symbol.
   }
 }
 ```
+
+</details>
 
 ## Usage examples
 
